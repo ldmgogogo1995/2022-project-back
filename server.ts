@@ -6,7 +6,7 @@
  * @Description: 服务开启页
  */
 
-import app from './app'
+import app from './src/app'
 app.listen('1995', () => {
     console.log('server start in 1995..')
 })
