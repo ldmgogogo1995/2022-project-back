@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-02-10 01:14:50
  * @LastEditors: ldm
- * @LastEditTime: 2022-02-10 22:45:10
+ * @LastEditTime: 2022-03-08 23:40:48
  */
 import { Router } from "express";
 import RoleController from "../controllers/role";
@@ -17,6 +17,5 @@ router
   .post("/create", create)
   .put("/:id", edit)
   .delete("/:id", deleteRole)
-  .patch("/role", eidtRole);
 
 export default router;

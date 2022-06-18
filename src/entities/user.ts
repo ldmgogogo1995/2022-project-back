@@ -4,9 +4,15 @@
  * @Autor: ldm
  * @Date: 2022-02-11 01:42:02
  * @LastEditors: ldm
- * @LastEditTime: 2022-02-12 02:50:01
+ * @LastEditTime: 2022-03-12 00:57:28
  */
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToMany,
+  JoinTable,
+} from "typeorm";
 @Entity()
 export class User {
   @PrimaryGeneratedColumn() // 自动生成主键列
@@ -15,4 +21,8 @@ export class User {
   nickname: string;
   @Column()
   account: string;
+  @Column()
+  password: string;
+  @Column()
+  discription: string;
 }

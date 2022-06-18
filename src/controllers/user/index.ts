@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-02-10 01:01:00
  * @LastEditors: ldm
- * @LastEditTime: 2022-02-12 03:26:35
+ * @LastEditTime: 2022-03-12 00:43:18
  */
 
 import { NextFunction, Request, Response } from "express";
@@ -14,7 +14,6 @@ class UserController {
   static list = async (req: Request, resp: Response, next: NextFunction) => {
     const userRepository = getRepository(User);
     const list = await userRepository.find();
-    console.log(list,'list')
     resp.send(list);
   };
   static detail = async (req: Request, resp: Response, next: NextFunction) => {
@@ -22,12 +21,15 @@ class UserController {
   };
   static create = async (req: Request, resp: Response, next: NextFunction) => {
     const userRepository = getRepository(User);
+
     const user = userRepository.create({
-      nickname: "ekko",
+      nickname: "ekko2",
       account: "18781932092",
+      password:'ldm541219',
+      discription:'超级管理元'
     });
     userRepository.save(user);
-    resp.send("创建成功");
+    resp.send("创建成功2");
   };
   static edit = async (req: Request, resp: Response, next: NextFunction) => {
     resp.send("修改");
