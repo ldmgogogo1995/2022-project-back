@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-02-23 00:11:16
  * @LastEditors: ldm
- * @LastEditTime: 2022-04-06 19:22:27
+ * @LastEditTime: 2022-07-16 01:11:03
  */
 import { Request, Response, NextFunction } from "express";
 import { User } from "../../entities/user";
@@ -23,12 +23,12 @@ class CommonController {
       const user = await userRepository.findOne({ account });
       if (!user) {
         // 不存在该用户
-        resp.status(401).json({ ...notFoundUser });
+        resp.status(200).json({ ...notFoundUser });
         return;
       } else {
         // 检查密码
         if (user.password !== password) {
-          resp.status(401).json({ ...passwordError });
+          resp.status(200).json({ ...passwordError });
           return;
         }
         // 生成登陆状态标识token
