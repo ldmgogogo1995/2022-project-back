@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-02-23 00:11:16
  * @LastEditors: ldm
- * @LastEditTime: 2022-07-16 01:11:03
+ * @LastEditTime: 2022-07-27 18:28:38
  */
 import { Request, Response, NextFunction } from "express";
 import { User } from "../../entities/user";
@@ -13,8 +13,15 @@ import { LOGIN_CODE_MESSAGE } from "./constants";
 import { COMMONT_CODE_MESSAGE, TOKEN_CONFIG } from "../../config";
 import jwt from "jsonwebtoken";
 const { notFoundUser, passwordError } = LOGIN_CODE_MESSAGE;
-const {} = COMMONT_CODE_MESSAGE;
 class CommonController {
+  /**
+   * @description: 处理登陆
+   * @param {Request} req
+   * @param {Response} resp
+   * @param {NextFunction} next
+   * @return {*}
+   * @author: ldm
+   */
   static login = async (req: Request, resp: Response, next: NextFunction) => {
     try {
       const { account, password } = req.body;
@@ -39,6 +46,23 @@ class CommonController {
       }
     } catch (error) {
       next(error);
+    }
+  };
+  /**
+   * @description: 获取权限
+   * @return {*}
+   * @author: ldm
+   */
+  static permissions = async (
+    req: Request,
+    resp: Response,
+    next: NextFunction
+  ) => {
+    try {
+      //获取用户角色
+      // const result = req.user
+    } catch (err) {
+      next(err);
     }
   };
 }

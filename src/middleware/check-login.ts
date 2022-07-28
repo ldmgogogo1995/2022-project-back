@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-03-16 23:26:55
  * @LastEditors: ldm
- * @LastEditTime: 2022-07-18 00:25:40
+ * @LastEditTime: 2022-07-27 01:41:22
  */
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
@@ -17,25 +17,22 @@ const checkLogin = () => {
     res: Response,
     next: NextFunction
   ) => {
-
     try {
       // 从请求头获取token
-      let token = req.get("Authentication");
+      let token = req.get("Authorization");
       const userRepository = getRepository(User);
-      console.log(token, "token");
       if (!token) {
-        return res.status(401).end('无访问权限');
+        return res.status(401).end("无访问权限");
       }
       token = token.split("Bearer ")?.[1]; // 注意后Bearer加一个空格
-      console.log(token,'tttt')
+
       // @ts-ignore
       const { userId } = jwt.verify(token, TOKEN_CONFIG.cert);
-      //@ts-ignore
+      // @ts-ignore
       req.user = await userRepository.findOne({ id: userId });
       next();
     } catch (error) {
-      console.log(error,'eee')
-      res.status(401).end('无访问权限');
+      res.status(401).end("无访问权限");
     }
   };
 };
