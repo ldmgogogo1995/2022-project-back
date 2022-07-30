@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-02-11 01:42:02
  * @LastEditors: ldm
- * @LastEditTime: 2022-03-12 00:57:28
+ * @LastEditTime: 2022-07-30 02:20:53
  */
 import {
   Entity,
@@ -13,16 +13,13 @@ import {
   ManyToMany,
   JoinTable,
 } from "typeorm";
+import { Base } from "./base";
 @Entity()
-export class User {
-  @PrimaryGeneratedColumn() // 自动生成主键列
-  id: number;
+export class User extends Base {
   @Column()
   nickname: string;
   @Column()
   account: string;
   @Column()
   password: string;
-  @Column()
-  discription: string;
 }
