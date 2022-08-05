@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-02-10 01:01:00
  * @LastEditors: ldm
- * @LastEditTime: 2022-08-05 19:35:21
+ * @LastEditTime: 2022-08-06 03:02:18
  */
 
 import { NextFunction, Request, Response } from "express";
@@ -46,7 +46,6 @@ class RoleController {
         take: +pageSize,
         where,
       });
-      console.log(req.query);
       resp.status(200).json({ ...ok, data, total });
     } catch (error) {
       next(error);
