@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-07-22 01:34:27
  * @LastEditors: ldm
- * @LastEditTime: 2022-07-25 01:25:42
+ * @LastEditTime: 2022-08-05 17:43:49
  */
 
 export const USER_CODE_MESSAGE: {
@@ -38,5 +38,13 @@ export const USER_CODE_MESSAGE: {
   id: {
     code: 10009,
     message: "请传入id",
+  },
+  age: {
+    code: 10010,
+    message: "请填写年龄",
+  },
+  sex: {
+    code: 10010,
+    message: "请选择性别",
   },
 };

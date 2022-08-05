@@ -1,10 +1,10 @@
 /*
- * @Description: 配置文件
+ * @Description: 配置文件/以及常量
  * @Version: 1.0
  * @Autor: ldm
  * @Date: 2022-03-16 23:46:55
  * @LastEditors: ldm
- * @LastEditTime: 2022-07-24 03:42:42
+ * @LastEditTime: 2022-08-05 00:28:46
  */
 
 export const COMMONT_CODE_MESSAGE: {
@@ -22,4 +22,13 @@ export const COMMONT_CODE_MESSAGE: {
 
 export const TOKEN_CONFIG = {
   cert: "ldmqwoei!@#_@!+_+%_123444",
+};
+
+export const DEFAULT_QUERY_PARAMS = {
+  current: 1,
+  pageSize: 20,
+  startUpdateDate: 0,
+  endUpdateDate: 999999999,
+  startCreateDate: 0,
+  endCreateDate: 999999999,
 };

@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-02-23 00:11:16
  * @LastEditors: ldm
- * @LastEditTime: 2022-07-27 18:28:38
+ * @LastEditTime: 2022-08-05 17:32:39
  */
 import { Request, Response, NextFunction } from "express";
 import { User } from "../../entities/user";
@@ -40,7 +40,7 @@ class CommonController {
         }
         // 生成登陆状态标识token
         const token = jwt.sign({ userId: user.id }, TOKEN_CONFIG.cert, {
-          expiresIn: "1h",
+          expiresIn: "24h",
         });
         resp.status(200).json({ ...ok, data: { user, token } });
       }

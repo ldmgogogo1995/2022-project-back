@@ -4,15 +4,9 @@
  * @Autor: ldm
  * @Date: 2022-02-11 01:42:02
  * @LastEditors: ldm
- * @LastEditTime: 2022-07-30 02:20:53
+ * @LastEditTime: 2022-08-05 18:45:49
  */
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToMany,
-  JoinTable,
-} from "typeorm";
+import { Entity, Column } from "typeorm";
 import { Base } from "./base";
 @Entity()
 export class User extends Base {
@@ -22,4 +16,14 @@ export class User extends Base {
   account: string;
   @Column()
   password: string;
+  @Column()
+  age: number;
+  @Column()
+  sex: string;
+  @Column()
+  email: string;
+  @Column()
+  phone: number;
+  @Column()
+  status: number;
 }
