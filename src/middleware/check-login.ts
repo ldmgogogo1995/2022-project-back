@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-03-16 23:26:55
  * @LastEditors: ldm
- * @LastEditTime: 2022-07-27 01:41:22
+ * @LastEditTime: 2022-08-10 21:15:02
  */
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
@@ -25,7 +25,7 @@ const checkLogin = () => {
         return res.status(401).end("无访问权限");
       }
       token = token.split("Bearer ")?.[1]; // 注意后Bearer加一个空格
-
+      console.log(token, "??");
       // @ts-ignore
       const { userId } = jwt.verify(token, TOKEN_CONFIG.cert);
       // @ts-ignore

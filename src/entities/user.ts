@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-02-11 01:42:02
  * @LastEditors: ldm
- * @LastEditTime: 2022-08-05 18:45:49
+ * @LastEditTime: 2022-08-07 01:44:14
  */
 import { Entity, Column } from "typeorm";
 import { Base } from "./base";
@@ -24,6 +24,8 @@ export class User extends Base {
   email: string;
   @Column()
   phone: number;
-  @Column()
+  @Column({
+    default: 1,
+  })
   status: number;
 }

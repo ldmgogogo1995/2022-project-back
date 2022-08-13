@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-07-30 02:14:14
  * @LastEditors: ldm
- * @LastEditTime: 2022-07-31 02:14:14
+ * @LastEditTime: 2022-08-07 02:40:12
  */
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 @Entity()
@@ -13,8 +13,8 @@ export class Base {
   id: number;
   @Column()
   discription: string; //描述
-  @Column()
+  @Column({ type: "bigint", default: Date.now() })
   createDate: number; //创建时间
-  @Column()
+  @Column({ type: "bigint", default: Date.now() })
   updateDate: number; //更新时间
 }

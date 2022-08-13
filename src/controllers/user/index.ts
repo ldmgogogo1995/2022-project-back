@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-02-10 01:01:00
  * @LastEditors: ldm
- * @LastEditTime: 2022-08-05 17:42:24
+ * @LastEditTime: 2022-08-14 04:25:47
  */
 
 import { NextFunction, Request, Response } from "express";
@@ -109,7 +109,6 @@ class UserController {
         email = "",
         phone = null,
       } = req.body;
-      const createDate = Date.now();
       // 校验必填参数
       if (!nickname) {
         resp.status(200).json({
@@ -158,7 +157,6 @@ class UserController {
         account,
         password,
         discription,
-        createDate,
         age,
         sex,
         phone,
@@ -169,7 +167,7 @@ class UserController {
         .then(() => {
           resp.status(200).json({ ...ok, data: user });
         })
-        .catch(() => {
+        .catch((err) => {
           resp.status(200).json({
             ...error,
           });
@@ -257,12 +255,40 @@ class UserController {
   ) => {
     resp.send("修改角色");
   };
+
+  /**
+   * @description:删除用户
+   * @return {*}
+   * @author: ldm
+   */
   static deleteUser = async (
     req: Request,
     resp: Response,
     next: NextFunction
   ) => {
-    resp.send("删除用户");
+    try {
+      const ids = Object.values(req.body) as string[];
+
+      // // 缺少id
+      if (!ids?.length) {
+        resp.status(200).json({
+          ...USER_CODE_MESSAGE.lackUserId,
+        });
+        return;
+      }
+
+      const userRepository = getRepository(User);
+      const result = await await userRepository.delete(ids);
+      //删除成功
+      if (!!result.affected) {
+        resp.status(200).json({ ...ok });
+      }else{
+        resp.status(200).json({ ...error })
+      }
+
+    } catch (error) {
+      next(error);
+    }
   };
 }
 export default UserController;
