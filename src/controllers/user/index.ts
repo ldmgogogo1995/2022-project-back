@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-02-10 01:01:00
  * @LastEditors: ldm
- * @LastEditTime: 2022-08-14 04:25:47
+ * @LastEditTime: 2022-08-16 01:59:02
  */
 
 import { NextFunction, Request, Response } from "express";
@@ -12,6 +12,7 @@ import { User } from "../../entities/user";
 import { Between, getRepository, ILike } from "typeorm";
 import { COMMONT_CODE_MESSAGE, DEFAULT_QUERY_PARAMS } from "../../config";
 import { USER_CODE_MESSAGE } from "./constans";
+import { formatSorter } from "../../utils/common";
 
 const { ok, error } = COMMONT_CODE_MESSAGE;
 class UserController {
@@ -34,8 +35,16 @@ class UserController {
         startCreateDate,
         endCreateDate,
         nickname,
+        direction = DEFAULT_QUERY_PARAMS.direction,
+        field = DEFAULT_QUERY_PARAMS.field,
         ...params
       } = req.query;
+      const frontSorter = {
+        direction,
+        field,
+      } as any;
+      // 格式化前端排序字段
+      const order = formatSorter(frontSorter);
       //@ts-ignore
       const where: any = params;
       // 按名称查询
@@ -50,13 +59,14 @@ class UserController {
       if (startUpdateDate && endUpdateDate) {
         where.nickname = Between(+startUpdateDate, +endUpdateDate);
       }
+      //@ts-ignore
       const [data, total] = await userRepository.findAndCount({
         cache: true,
         skip: +pageSize * (+current - 1),
         take: +pageSize,
         where,
+        order,
       });
-      console.log(req.query);
       resp.status(200).json({ ...ok, data, total });
     } catch (error) {
       next(error);
@@ -282,10 +292,9 @@ class UserController {
       //删除成功
       if (!!result.affected) {
         resp.status(200).json({ ...ok });
-      }else{
-        resp.status(200).json({ ...error })
+      } else {
+        resp.status(200).json({ ...error });
       }
-
     } catch (error) {
       next(error);
     }

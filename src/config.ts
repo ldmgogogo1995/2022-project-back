@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-03-16 23:46:55
  * @LastEditors: ldm
- * @LastEditTime: 2022-08-05 00:28:46
+ * @LastEditTime: 2022-08-16 01:58:20
  */
 
 export const COMMONT_CODE_MESSAGE: {
@@ -31,4 +31,6 @@ export const DEFAULT_QUERY_PARAMS = {
   endUpdateDate: 999999999,
   startCreateDate: 0,
   endCreateDate: 999999999,
+  field: "createDate",
+  direction: "ASC",
 };
