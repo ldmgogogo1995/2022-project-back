@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-02-10 01:01:00
  * @LastEditors: ldm
- * @LastEditTime: 2022-08-16 01:59:02
+ * @LastEditTime: 2022-08-28 05:46:16
  */
 
 import { NextFunction, Request, Response } from "express";
@@ -13,6 +13,7 @@ import { Between, getRepository, ILike } from "typeorm";
 import { COMMONT_CODE_MESSAGE, DEFAULT_QUERY_PARAMS } from "../../config";
 import { USER_CODE_MESSAGE } from "./constans";
 import { formatSorter } from "../../utils/common";
+import { Role } from "../../entities/role";
 
 const { ok, error } = COMMONT_CODE_MESSAGE;
 class UserController {
@@ -66,6 +67,7 @@ class UserController {
         take: +pageSize,
         where,
         order,
+        relations: ["roles"],
       });
       resp.status(200).json({ ...ok, data, total });
     } catch (error) {
@@ -92,7 +94,10 @@ class UserController {
         return;
       }
       const userRepository = getRepository(User);
-      const user = await userRepository.findOne(+id);
+      //@ts-ignore
+      const user = await userRepository.findOne(id, {
+        relations: ["roles"],
+      });
       resp.status(200).json({ ...ok, data: user });
     } catch (error) {
       next(error);
@@ -118,6 +123,7 @@ class UserController {
         sex,
         email = "",
         phone = null,
+        roles = [],
       } = req.body;
       // 校验必填参数
       if (!nickname) {
@@ -161,7 +167,8 @@ class UserController {
         });
         return;
       }
-
+      const roleRepository = getRepository(Role);
+      const _roles = await roleRepository.findByIds(roles);
       const user = userRepository.create({
         nickname,
         account,
@@ -171,6 +178,7 @@ class UserController {
         sex,
         phone,
         email,
+        roles: _roles,
       });
       userRepository
         .save(user)
@@ -197,7 +205,17 @@ class UserController {
    */
   static edit = async (req: Request, resp: Response, next: NextFunction) => {
     try {
-      const { nickname, account, password, id, discription } = req.body;
+      const {
+        nickname,
+        account,
+        password,
+        id,
+        discription,
+        age,
+        roles = [],
+        sex,
+        email,
+      } = req.body;
       const updateDate = Date.now();
       // 校验必填参数
       if (!id) {
@@ -225,17 +243,9 @@ class UserController {
         return;
       }
       const userRepository = getRepository(User);
-
-      //查询是否有重复用户
-      const hasUser = await userRepository.findOne({ account });
-      if (!!hasUser) {
-        resp.status(200).json({
-          ...USER_CODE_MESSAGE.hasUser,
-        });
-        return;
-      }
-
+      const roleRepository = getRepository(Role);
       const user = await userRepository.findOne(+id);
+      const _roles = await roleRepository.findByIds(roles);
 
       userRepository.merge(user, {
         nickname,
@@ -243,6 +253,10 @@ class UserController {
         account,
         password,
         updateDate,
+        age,
+        sex,
+        email,
+        roles: _roles,
       });
       userRepository
         .save(user)
