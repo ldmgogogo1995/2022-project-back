@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-02-10 01:01:00
  * @LastEditors: ldm
- * @LastEditTime: 2022-08-28 05:46:16
+ * @LastEditTime: 2022-09-24 02:16:20
  */
 
 import { NextFunction, Request, Response } from "express";
@@ -272,12 +272,48 @@ class UserController {
       next(error);
     }
   };
-  static eidtRole = async (
+
+  /**
+   * @description:启用/禁用角色
+   * @return {*}
+   * @author: ldm
+   */
+  static updateStatus = async (
     req: Request,
     resp: Response,
     next: NextFunction
   ) => {
-    resp.send("修改角色");
+    try {
+      const updateDate = Date.now();
+      const { id, status = 1 } = req.body;
+
+      // 校验必填参数
+      if (!id) {
+        resp.status(200).json({
+          ...USER_CODE_MESSAGE.id,
+        });
+        return;
+      }
+
+      const userRepository = getRepository(User);
+      const user = await userRepository.findOne(id);
+      userRepository.merge(user, {
+        status,
+        updateDate,
+      });
+      userRepository
+        .save(user)
+        .then(() => {
+          resp.status(200).json({ ...ok, data: user });
+        })
+        .catch(() => {
+          resp.status(200).json({
+            ...error,
+          });
+        });
+    } catch (error) {
+      next(error);
+    }
   };
 
   /**
