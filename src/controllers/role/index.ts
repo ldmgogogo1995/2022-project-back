@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-02-10 01:01:00
  * @LastEditors: ldm
- * @LastEditTime: 2022-08-06 03:02:18
+ * @LastEditTime: 2022-09-28 01:31:55
  */
 
 import { NextFunction, Request, Response } from "express";
@@ -60,14 +60,14 @@ class RoleController {
       const {
         name = "",
         code = "",
-        discription,
+        description,
         status = "forbidden",
       } = req?.body;
 
       const role = roleRepository.create({
         name,
         code,
-        discription,
+        description,
         status,
       });
       roleRepository.save(role);

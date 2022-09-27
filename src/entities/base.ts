@@ -12,7 +12,7 @@ export class Base {
   @PrimaryGeneratedColumn() // 自动生成主键列
   id: number;
   @Column()
-  discription: string; //描述
+  description: string; //描述
   @Column({ type: "bigint", default: Date.now() })
   createDate: number; //创建时间
   @Column({ type: "bigint", default: Date.now() })

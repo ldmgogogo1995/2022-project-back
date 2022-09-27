@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-02-10 01:14:50
  * @LastEditors: ldm
- * @LastEditTime: 2022-09-24 02:02:37
+ * @LastEditTime: 2022-09-28 01:35:59
  */
 import { Router } from "express";
 import UserController from "../controllers/user";
@@ -15,8 +15,8 @@ router
   .get("/list", list)
   .get("/detail", detail)
   .post("/create", create)
-  .put("/", edit)
-  .delete("/", deleteUser)
+  .put("/:id", edit)
+  .delete("/:id", deleteUser)
   .put("/updateStatus", updateStatus);
 
 export default router;
