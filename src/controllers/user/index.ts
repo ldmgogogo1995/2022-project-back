@@ -4,14 +4,14 @@
  * @Autor: ldm
  * @Date: 2022-02-10 01:01:00
  * @LastEditors: ldm
- * @LastEditTime: 2022-09-24 02:16:20
+ * @LastEditTime: 2022-11-16 23:27:23
  */
 
 import { NextFunction, Request, Response } from "express";
 import { User } from "../../entities/user";
 import { Between, getRepository, ILike } from "typeorm";
 import { COMMONT_CODE_MESSAGE, DEFAULT_QUERY_PARAMS } from "../../config";
-import { USER_CODE_MESSAGE } from "./constans";
+import { USER_CODE_MESSAGE } from "./constants";
 import { formatSorter } from "../../utils/common";
 import { Role } from "../../entities/role";
 
@@ -25,7 +25,7 @@ class UserController {
    * @return {*}
    * @author: ldm
    */
-  static list = async (req: Request, resp: Response, next: NextFunction) => {
+  static pageList = async (req: Request, resp: Response, next: NextFunction) => {
     try {
       const userRepository = getRepository(User);
       const {
@@ -217,7 +217,7 @@ class UserController {
         email,
       } = req.body;
       const updateDate = Date.now();
-      // 校验必填参数
+      // 校验必填参数/s/1/1259/386.html
       if (!id) {
         resp.status(200).json({
           ...USER_CODE_MESSAGE.id,

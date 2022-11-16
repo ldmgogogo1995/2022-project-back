@@ -4,15 +4,15 @@
  * @Autor: ldm
  * @Date: 2022-02-10 01:14:50
  * @LastEditors: ldm
- * @LastEditTime: 2022-09-28 01:35:59
+ * @LastEditTime: 2022-09-29 01:48:15
  */
 import { Router } from "express";
 import UserController from "../controllers/user";
 
 const router = Router();
-const { list, detail, create, edit, deleteUser, updateStatus } = UserController;
+const { pageList, detail, create, edit, deleteUser, updateStatus } = UserController;
 router
-  .get("/list", list)
+  .get("/page", pageList)
   .get("/detail", detail)
   .post("/create", create)
   .put("/:id", edit)

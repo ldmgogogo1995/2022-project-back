@@ -4,7 +4,7 @@
  * @Autor: ldm
  * @Date: 2022-07-30 02:14:14
  * @LastEditors: ldm
- * @LastEditTime: 2022-08-07 02:40:12
+ * @LastEditTime: 2022-11-16 00:45:18
  */
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 @Entity()

@@ -4,16 +4,16 @@
  * @Autor: ldm
  * @Date: 2022-02-11 01:42:02
  * @LastEditors: ldm
- * @LastEditTime: 2022-07-30 02:21:26
+ * @LastEditTime: 2022-11-16 23:06:28
  */
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, Column } from "typeorm";
 import { Base } from "./base";
 @Entity()
 export class Role extends Base {
   @Column()
   name: string;
   @Column()
-  status: string;
+  status: number;
   @Column()
   code: string;
 }
